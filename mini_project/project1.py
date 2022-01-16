@@ -1,6 +1,3 @@
-from ctypes.wintypes import tagMSG
-from datetime import date
-from matplotlib.pyplot import contour
 import openpyxl
 import logging
 import pathlib
@@ -10,7 +7,7 @@ import datetime
 #Program to import data from a specific Expedia monthly report and give information from the corresponding month and year.
 
 #Set up logger
-logging.basicConfig(filename="report_log",
+logging.basicConfig(filename="mini_project/report_log",
                     format='%(asctime)s %(message)s',
                     filemode='w')
 logger = logging.getLogger()
@@ -101,6 +98,7 @@ while not exit: #loop to return to top to get input again if file does not exist
     else:
         detractors = 'good'
     column_data = (promoters, passives, detractors, target_col[15], target_col[15], target_col[18])
+    logging.info(f"Data from sheet \'VOC Rolling Mom\': {column_data}")
     output_sheet1 = f"Calls Offered: {target_row[1]} \nAbandon after 30s: {target_row[2] *100}% \nFCR: {target_row[3]*100}% \nDSAT: {target_row[4]*100}% \nCSAT: {target_row[5]*100}%"
     output_sheet2 = f"Promoters: {column_data[0]}\nPassives: {column_data[1]}\nDetractors: {column_data[2]}\nOverall NPS %: {column_data[3]*100}%\nSat with Agent %: {column_data[4]*100}%\nDSAT with Agent % {column_data[5]*100}%"
     logging.info(output_sheet1)
@@ -108,4 +106,5 @@ while not exit: #loop to return to top to get input again if file does not exist
     print(f"{output_sheet1}\n{output_sheet2}")
     another_report = input("Type REPEAT to get the data from another report, otherwise enter to quit:\n")
     if  another_report.upper() != 'REPEAT':
+        logging.info("Program complete and ended.")
         break
