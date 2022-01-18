@@ -14,7 +14,6 @@ def get_report_information(report_filename):
                         format='%(asctime)s %(levelname)s: %(message)s',
                         filemode='w', level=logging.INFO)
     os.chdir("..")
-    logger = logging.getLogger()
     logging.info(f"Running script {pathlib.Path(__file__).resolve().as_uri()}")
 
     #dictionary to convert filename month into number for datetime
@@ -74,8 +73,8 @@ def get_report_information(report_filename):
                     target_row[5]*100  #CSAT
                     )
         column_data = ((lambda x : 'good' if x >= 200 else 'bad')(target_col[3]), #promoters evaluation
-                    (lambda x : 'good' if x <= 100 else 'bad')(target_col[5]), #passives
-                    (lambda x : 'good' if x <= 100 else 'bad')(target_col[7]), #detractors
+                    (lambda x : 'good' if x <= 100 else 'bad')(target_col[5]), #passives evaluation
+                    (lambda x : 'good' if x <= 100 else 'bad')(target_col[7]), #detractors evaluation
                     target_col[15]*100, #Overall NPS
                     target_col[15]*100, #Sat with Agent
                     target_col[18]*100  #Detractors
@@ -88,7 +87,8 @@ def get_report_information(report_filename):
     logging.info(f"Data from sheet \'VOC Rolling Mom\': {column_data}")
     output_sheet1 = f"Calls Offered: {row_data[0]} \nAbandon after 30s: {row_data[1]}% \nFCR: {row_data[2]}% \nDSAT: {row_data[3]}% \nCSAT: {row_data[4]}%\n"
     output_sheet2 = f"Promoters: {column_data[0]}\nPassives: {column_data[1]}\nDetractors: {column_data[2]}\nOverall NPS %: {column_data[3]}%\nSat with Agent %: {column_data[4]}%\nDSAT with Agent % {column_data[5]}%"
-    logging.info(f'Returning following string:\n{output_sheet1 + output_sheet2}')
+    log_output = (output_sheet1 + output_sheet2).replace('\n',' ')
+    logging.info(f"Returning following string: {log_output}")
     return output_sheet1 + output_sheet2
     
 def console_input():
