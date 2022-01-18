@@ -2,7 +2,7 @@ import openpyxl
 import logging
 import pathlib
 import datetime
-
+import os
 
 """Function to import data from a specific Expedia monthly report and give information from the corresponding month and year. Takes a filename as input.
 File must be in format expedia_report_monthly_xxxx_yyyy.xlsx where xxxx is the full name month (eg, january) and yyyy is four digit year (eg, 2018)
@@ -10,9 +10,10 @@ Returns string of information from report if input is valid.
 Raises ValueError if filename is in wrong format and FileNotFound if the file does not exist."""
 def get_report_information(report_filename):
 
-    logging.basicConfig(filename=f"mini_project/get_report_information_log{datetime.datetime.now().strftime('%m%d%y%H%M%S')}",
+    logging.basicConfig(filename=f"mini_project/logs/get_report_information_log{datetime.datetime.now().strftime('%m%d%y%H%M%S')}",
                         format='%(asctime)s %(levelname)s %(message)s',
                         filemode='w', level=logging.INFO)
+    os.chdir("..")
     logger = logging.getLogger()
     logging.info(f"Running script {pathlib.Path(__file__).resolve().as_uri()}")
 
