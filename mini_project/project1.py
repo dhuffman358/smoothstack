@@ -9,15 +9,15 @@ File must be in format expedia_report_monthly_xxxx_yyyy.xlsx where xxxx is the f
 Returns string of information from report if input is valid. 
 Raises ValueError if filename is in wrong format and FileNotFound if the file does not exist."""
 def get_report_information(report_filename):
-    #Set up logger
+
     logging.basicConfig(filename=f"mini_project/get_report_information_log{datetime.datetime.now().strftime('%m%d%y%H%M%S')}",
-                        format='%(asctime)s %(message)s',
+                        format='%(asctime)s %(levelname)s %(message)s',
                         filemode='w', level=logging.INFO)
     logger = logging.getLogger()
     logging.info(f"Running script {pathlib.Path(__file__).resolve().as_uri()}")
 
     #dictionary to convert filename month into number for datetime
-    month_number = {'january':1, 'february':2, 'mar':3, 'april': 4, 'may':5, 'june' : 6,
+    month_number = {'january':1, 'february':2, 'march':3, 'april': 4, 'may':5, 'june' : 6,
                     'july': 7,'august':8,'september':9,'october':10,'november':11,'december':12}
 
     #logic to ensure that the file name is in the correct format: expedia_report_monthly_january_2018.xlsx and extract month and year
@@ -35,7 +35,6 @@ def get_report_information(report_filename):
         logging.error('Value error: Not an xlsx file.')
         raise ValueError
     logging.info(f"Month is {month} and year is {year}")
-    print(report_filename)
     #Loading file and getting the two relevant sheets from the spreadsheet
     try:
         expedia_workbook = openpyxl.load_workbook(report_filename)
