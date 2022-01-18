@@ -57,7 +57,7 @@ def get_report_information(report_filename):
             continue
     for col in sheet2.iter_cols(min_row =1, min_col=1, values_only=True):
             if type(col[0]) == type(''):
-                if col[0].upper().find(month) != -1 or col[0].upper()[0:2] == month: #checks in case data is a word
+                if col[0].upper().find(month[0:2].upper()) != -1 or col[0].upper()[0:2] == month[0:2].upper(): #checks in case data is a word
                     target_col = col
                     break #data is arranged with leftmost as most recent, if title of column is a word just want the first march
             if type(col[0]) == type(date_code):
