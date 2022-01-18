@@ -11,7 +11,7 @@ Raises ValueError if filename is in wrong format and FileNotFound if the file do
 def get_report_information(report_filename):
 
     logging.basicConfig(filename=f"mini_project/logs/get_report_information_log{datetime.datetime.now().strftime('%m%d%y%H%M%S')}",
-                        format='%(asctime)s %(levelname)s %(message)s',
+                        format='%(asctime)s %(levelname)s: %(message)s',
                         filemode='w', level=logging.INFO)
     os.chdir("..")
     logger = logging.getLogger()
@@ -88,6 +88,7 @@ def get_report_information(report_filename):
     logging.info(f"Data from sheet \'VOC Rolling Mom\': {column_data}")
     output_sheet1 = f"Calls Offered: {row_data[0]} \nAbandon after 30s: {row_data[1]}% \nFCR: {row_data[2]}% \nDSAT: {row_data[3]}% \nCSAT: {row_data[4]}%\n"
     output_sheet2 = f"Promoters: {column_data[0]}\nPassives: {column_data[1]}\nDetractors: {column_data[2]}\nOverall NPS %: {column_data[3]}%\nSat with Agent %: {column_data[4]}%\nDSAT with Agent % {column_data[5]}%"
+    logging.info(f'Returning following string:\n{output_sheet1 + output_sheet2}')
     return output_sheet1 + output_sheet2
     
 def console_input():
@@ -142,7 +143,6 @@ def console_input():
             print('File not found. Try again?')
         another_report = input("Type REPEAT to get the data from another report, otherwise enter to quit:\n")
         if  another_report.upper() != 'REPEAT':
-            logging.info("Program complete and ended.")
             break
 if __name__ == '__main__':
     console_input()
