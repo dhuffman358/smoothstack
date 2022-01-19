@@ -9,7 +9,7 @@ File must be in format expedia_report_monthly_xxxx_yyyy.xlsx where xxxx is the f
 Returns string of information from report if input is valid. 
 Raises ValueError if filename is in wrong format and FileNotFound if the file does not exist."""
 def get_report_information(report_filename):
-
+    #setting up logging
     logging.basicConfig(filename=f"mini_project/logs/get_report_information_log{datetime.datetime.now().strftime('%m%d%y%H%M%S')}",
                         format='%(asctime)s %(levelname)s: %(message)s',
                         filemode='w', level=logging.INFO)
