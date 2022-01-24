@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block content %}
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col"> </th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Admin?</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% set i = 1 %}
+        {%for user in ulist %}
+            <tr>
+                <th scope="row"></th>
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.admin}}</td>
+            </tr>
+            {%set i = i +1%}
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}
